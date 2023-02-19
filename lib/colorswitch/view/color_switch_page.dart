@@ -60,7 +60,9 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.5),
+                color: _bgColor == Colors.black
+                    ? Colors.white.withOpacity(0.5)
+                    : Colors.black.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 7,
                 offset: const Offset(0, 3),
@@ -72,20 +74,32 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Colorfy',
-                  style: TextStyle(fontSize: 20, fontFamily: 'SFBold'),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'SFBold',
+                    color: _bgColor == Colors.black ? Colors.white : null,
+                  ),
                 ),
-                const Text(
+                Text(
                   'User ID: 3',
-                  style: TextStyle(fontSize: 15, fontFamily: 'SFRegular'),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'SFRegular',
+                    color: _bgColor == Colors.black ? Colors.white : null,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
+                Text(
                   'Personalize for your friends',
-                  style: TextStyle(fontSize: 15, fontFamily: 'SFRegular'),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'SFRegular',
+                    color: _bgColor == Colors.black ? Colors.white : null,
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
