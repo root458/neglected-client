@@ -7,8 +7,11 @@ class CColor {
   });
 
   /// From Json constructor
-  factory CColor.fromJson(Map<String, String> color) {
-    return CColor(color: color['color']!, clientID: color['clientID']!);
+  factory CColor.fromJson(Map<String, dynamic> color) {
+    return CColor(
+      color: color['color']! as String,
+      clientID: color['clientID']! as String,
+    );
   }
 
   /// Color
