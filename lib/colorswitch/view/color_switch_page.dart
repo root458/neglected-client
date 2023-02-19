@@ -28,6 +28,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
         setState(() {
           _count = data as String;
         });
+        // _channel.sink.add(_encoder.convert(CColor(color: 'black').toJson())),
         // final color = CColor.fromJson(
         //   _decoder.convert(data as String) as Map<String, String>,
         // );
@@ -46,25 +47,66 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: ColorSwitchText(count: _count)),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            // onPressed: () => _channel.sink.add('__increment__'),
-            onPressed: () => _channel.sink
-                .add(_encoder.convert(CColor(color: 'black').toJson())),
-            child: const Icon(Icons.add),
+      backgroundColor: Colors.blue,
+      body: Center(
+        child: Container(
+          height: 300,
+          width: 800,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-            // onPressed: () => _channel.sink.add('__decrement__'),
-            onPressed: () => _channel.sink
-                .add(_encoder.convert(CColor(color: 'red').toJson())),
-            child: const Icon(Icons.remove),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Colorfy'),
+              const Text('User ID: 3'),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text('Personalize for your friends'),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: const [
+                  CircleAvatar(
+                    backgroundColor: Colors.red,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.black,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.blue,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.green,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.yellow,
+                  )
+                ],
+              )
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
