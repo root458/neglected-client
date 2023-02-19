@@ -93,28 +93,32 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                     ),
                     GestureDetector(
                       onTap: () => _channel.sink.add(
-                          _encoder.convert(CColor(color: 'white').toJson())),
+                        _encoder.convert(CColor(color: 'white').toJson()),
+                      ),
                       child: const CircleAvatar(
                         backgroundColor: Colors.white,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => _channel.sink.add(
-                          _encoder.convert(CColor(color: 'black').toJson())),
+                        _encoder.convert(CColor(color: 'black').toJson()),
+                      ),
                       child: const CircleAvatar(
                         backgroundColor: Colors.black,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => _channel.sink.add(
-                          _encoder.convert(CColor(color: 'blue').toJson())),
+                        _encoder.convert(CColor(color: 'blue').toJson()),
+                      ),
                       child: const CircleAvatar(
                         backgroundColor: Colors.blue,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => _channel.sink.add(
-                          _encoder.convert(CColor(color: 'green').toJson())),
+                        _encoder.convert(CColor(color: 'green').toJson()),
+                      ),
                       child: const CircleAvatar(
                         backgroundColor: Colors.green,
                       ),
