@@ -13,7 +13,6 @@ class ColorSwitchPage extends StatefulWidget {
 
 class _ColorSwitchPageState extends State<ColorSwitchPage> {
   late WebSocketChannel _channel;
-  late String _count;
   late JsonEncoder _encoder;
   late JsonDecoder _decoder;
 
@@ -21,18 +20,15 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   void initState() {
     _encoder = const JsonEncoder();
     _decoder = const JsonDecoder();
-    _count = 'Not set';
     _channel = WebSocketChannel.connect(Uri.parse('ws://localhost:8080/ws'));
     _channel.stream.listen(
       (data) {
         setState(() {
-          _count = data as String;
+          final color = CColor.fromJson(
+            _decoder.convert(data as String) as Map<String, String>,
+          );
+          print(color.toJson());
         });
-        // _channel.sink.add(_encoder.convert(CColor(color: 'black').toJson())),
-        // final color = CColor.fromJson(
-        //   _decoder.convert(data as String) as Map<String, String>,
-        // );
-        // print(color.toJson());
       },
     );
     super.initState();
@@ -69,67 +65,70 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
               ),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Colorfy'),
-              const Text('User ID: 3'),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Personalize for your friends'),
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => _channel.sink
-                        .add(_encoder.convert(CColor(color: 'red').toJson())),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.red,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Colorfy'),
+                const Text('User ID: 3'),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text('Personalize for your friends'),
+                const SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () => _channel.sink
+                          .add(_encoder.convert(CColor(color: 'red').toJson())),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.red,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _channel.sink
-                        .add(_encoder.convert(CColor(color: 'white').toJson())),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.white,
+                    GestureDetector(
+                      onTap: () => _channel.sink
+                          .add(_encoder.convert(CColor(color: 'white').toJson())),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.white,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _channel.sink
-                        .add(_encoder.convert(CColor(color: 'black').toJson())),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.black,
+                    GestureDetector(
+                      onTap: () => _channel.sink
+                          .add(_encoder.convert(CColor(color: 'black').toJson())),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.black,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _channel.sink
-                        .add(_encoder.convert(CColor(color: 'blue').toJson())),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.blue,
+                    GestureDetector(
+                      onTap: () => _channel.sink
+                          .add(_encoder.convert(CColor(color: 'blue').toJson())),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.blue,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _channel.sink
-                        .add(_encoder.convert(CColor(color: 'green').toJson())),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.green,
+                    GestureDetector(
+                      onTap: () => _channel.sink
+                          .add(_encoder.convert(CColor(color: 'green').toJson())),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.green,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _channel.sink.add(
-                      _encoder.convert(CColor(color: 'yellow').toJson()),
-                    ),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                    ),
-                  )
-                ],
-              )
-            ],
+                    GestureDetector(
+                      onTap: () => _channel.sink.add(
+                        _encoder.convert(CColor(color: 'yellow').toJson()),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
