@@ -20,3 +20,24 @@ class Utils {
     }
   }
 }
+
+class ColorSwitchValues {
+  ColorSwitchValues({
+    required this.baseDomain,
+  });
+
+  final String baseDomain;
+}
+
+class ColorSwitchConfig {
+  factory ColorSwitchConfig({required ColorSwitchValues values}) {
+    return _instance ??= ColorSwitchConfig._internal(values);
+  }
+
+  ColorSwitchConfig._internal(this.values);
+
+  final ColorSwitchValues values;
+  static ColorSwitchConfig? _instance;
+
+  static ColorSwitchConfig? get instance => _instance;
+}

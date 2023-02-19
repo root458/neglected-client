@@ -22,7 +22,9 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   void initState() {
     _encoder = const JsonEncoder();
     _decoder = const JsonDecoder();
-    _channel = WebSocketChannel.connect(Uri.parse('ws://localhost:8080/ws'));
+    _channel = WebSocketChannel.connect(
+      Uri.parse(ColorSwitchConfig.instance!.values.baseDomain),
+    );
     _channel.stream.listen(
       (data) {
         setState(() {
