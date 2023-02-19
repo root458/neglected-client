@@ -109,58 +109,78 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () => _channel.sink
-                          .add(_encoder.convert(CColor(color: 'red').toJson())),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.red,
-                      ),
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.red,
+                      colorStr: 'red',
                     ),
-                    GestureDetector(
-                      onTap: () => _channel.sink.add(
-                        _encoder.convert(CColor(color: 'white').toJson()),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.white,
-                      ),
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.white,
+                      colorStr: 'white',
                     ),
-                    GestureDetector(
-                      onTap: () => _channel.sink.add(
-                        _encoder.convert(CColor(color: 'black').toJson()),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.black,
-                      ),
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.black,
+                      colorStr: 'black',
                     ),
-                    GestureDetector(
-                      onTap: () => _channel.sink.add(
-                        _encoder.convert(CColor(color: 'blue').toJson()),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.blue,
-                      ),
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.blue,
+                      colorStr: 'blue',
                     ),
-                    GestureDetector(
-                      onTap: () => _channel.sink.add(
-                        _encoder.convert(CColor(color: 'green').toJson()),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.green,
-                      ),
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.green,
+                      colorStr: 'green',
                     ),
-                    GestureDetector(
-                      onTap: () => _channel.sink.add(
-                        _encoder.convert(CColor(color: 'yellow').toJson()),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.yellow,
-                      ),
-                    )
+                    ColorAvatar(
+                      channel: _channel,
+                      encoder: _encoder,
+                      color: Colors.yellow,
+                      colorStr: 'yellow',
+                    ),
                   ],
                 )
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ColorAvatar extends StatelessWidget {
+  const ColorAvatar({
+    required WebSocketChannel channel,
+    required JsonEncoder encoder,
+    required this.colorStr,
+    required this.color,
+    super.key,
+  })  : _channel = channel,
+        _encoder = encoder;
+
+  final WebSocketChannel _channel;
+  final JsonEncoder _encoder;
+  final String colorStr;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _channel.sink.add(
+          _encoder.convert(CColor(color: colorStr).toJson()),
+        ),
+        child: CircleAvatar(
+          backgroundColor: color,
         ),
       ),
     );
