@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ds_client/colorswitch/models/ccolor.dart';
+import 'package:ds_client/colorswitch/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -15,6 +16,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   late WebSocketChannel _channel;
   late JsonEncoder _encoder;
   late JsonDecoder _decoder;
+  Color _bgColor = Colors.white;
 
   @override
   void initState() {
@@ -25,9 +27,9 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
       (data) {
         setState(() {
           final color = CColor.fromJson(
-            _decoder.convert(data as String) as Map<String, String>,
+            _decoder.convert(data as String) as Map<String, dynamic>,
           );
-          print(color.toJson());
+          _bgColor = Utils.getColor(color.color);
         });
       },
     );
@@ -43,13 +45,13 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: _bgColor,
       body: Center(
         child: Container(
           height: 300,
           width: 800,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: _bgColor,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -90,29 +92,29 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => _channel.sink
-                          .add(_encoder.convert(CColor(color: 'white').toJson())),
+                      onTap: () => _channel.sink.add(
+                          _encoder.convert(CColor(color: 'white').toJson())),
                       child: const CircleAvatar(
                         backgroundColor: Colors.white,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => _channel.sink
-                          .add(_encoder.convert(CColor(color: 'black').toJson())),
+                      onTap: () => _channel.sink.add(
+                          _encoder.convert(CColor(color: 'black').toJson())),
                       child: const CircleAvatar(
                         backgroundColor: Colors.black,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => _channel.sink
-                          .add(_encoder.convert(CColor(color: 'blue').toJson())),
+                      onTap: () => _channel.sink.add(
+                          _encoder.convert(CColor(color: 'blue').toJson())),
                       child: const CircleAvatar(
                         backgroundColor: Colors.blue,
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => _channel.sink
-                          .add(_encoder.convert(CColor(color: 'green').toJson())),
+                      onTap: () => _channel.sink.add(
+                          _encoder.convert(CColor(color: 'green').toJson())),
                       child: const CircleAvatar(
                         backgroundColor: Colors.green,
                       ),
