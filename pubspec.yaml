@@ -27,3 +27,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  fonts:
+    - family: SFBold
+      fonts:
+        - asset: assets/sf-bold.otf
+    - family: SFRegular
+      fonts:
+        - asset: assets/sf-regular.otf

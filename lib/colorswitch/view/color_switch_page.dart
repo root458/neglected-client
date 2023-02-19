@@ -72,12 +72,21 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Colorfy'),
-                const Text('User ID: 3'),
+                const Text(
+                  'Colorfy',
+                  style: TextStyle(fontSize: 20, fontFamily: 'SFBold'),
+                ),
+                const Text(
+                  'User ID: 3',
+                  style: TextStyle(fontSize: 15, fontFamily: 'SFRegular'),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text('Personalize for your friends'),
+                const Text(
+                  'Personalize for your friends',
+                  style: TextStyle(fontSize: 15, fontFamily: 'SFRegular'),
+                ),
                 const SizedBox(
                   height: 50,
                 ),
