@@ -24,9 +24,11 @@ class Utils {
 class ColorSwitchValues {
   ColorSwitchValues({
     required this.baseDomain,
+    required this.clientUniqueID,
   });
 
   final String baseDomain;
+  final String clientUniqueID;
 }
 
 class ColorSwitchConfig {
