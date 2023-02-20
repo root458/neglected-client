@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ds_client/colorswitch/models/ccolor.dart';
+import 'package:ds_client/colorswitch/models/message.dart';
 import 'package:ds_client/colorswitch/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -16,6 +17,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   late WebSocketChannel _channel;
   late JsonEncoder _encoder;
   late JsonDecoder _decoder;
+  String _clientID = '0';
   Color _bgColor = Colors.white;
 
   @override
@@ -28,10 +30,20 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
     _channel.stream.listen(
       (data) {
         setState(() {
-          final color = CColor.fromJson(
+          // Get message
+          final message = Message.fromJson(
             _decoder.convert(data as String) as Map<String, dynamic>,
           );
-          _bgColor = Utils.getColor(color.color);
+          _clientID = message.clientID;
+          switch (message.purpose) {
+            case '_colorchange_':
+              final color = CColor.fromJson(
+                _decoder.convert(message.data) as Map<String, dynamic>,
+              );
+              _bgColor = Utils.getColor(color.color);
+              break;
+            default:
+          }
         });
       },
     );
@@ -85,7 +97,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                   ),
                 ),
                 SelectableText(
-                  'User ID: 3',
+                  'User ID: $_clientID',
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'SFRegular',
