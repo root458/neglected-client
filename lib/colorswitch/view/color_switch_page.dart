@@ -34,13 +34,25 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
           final message = Message.fromJson(
             _decoder.convert(data as String) as Map<String, dynamic>,
           );
-          _clientID = message.clientID;
+
+          // Get IDs of all connected clients
+          final currentConnections =
+              json.decode(message.connections) as List<dynamic>;
+          // Get rank of current Index
+          final thisClientIndex = currentConnections
+              .indexOf(ColorSwitchConfig.instance!.values.clientUniqueID);
+          _clientID = thisClientIndex == -1 ? 'Not set' : '$thisClientIndex';
           switch (message.purpose) {
             case '_colorchange_':
               final color = CColor.fromJson(
                 _decoder.convert(message.data) as Map<String, dynamic>,
               );
-              _bgColor = Utils.getColor(color.color);
+
+              // Update color if rank of sender
+              // is higher or you sent the request
+              if (thisClientIndex >= int.parse(message.clientID)) {
+                _bgColor = Utils.getColor(color.color);
+              }
               break;
             default:
           }
