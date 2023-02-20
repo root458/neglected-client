@@ -5,6 +5,7 @@ class Message {
     required this.purpose,
     required this.data,
     required this.clientID,
+    required this.connections,
   });
 
   /// From Json constructor
@@ -13,6 +14,7 @@ class Message {
       purpose: message['purpose']! as String,
       data: message['data']! as String,
       clientID: message['clientID']! as String,
+      connections: message['connections']! as String,
     );
   }
 
@@ -25,12 +27,16 @@ class Message {
   /// Stringified string that contains the message
   final String data;
 
-  /// Convery object to JSON
-  Map<String, String> toJson() {
-    return <String, String>{
+  /// Connections hashmap
+  final String connections;
+
+  /// Convert object to JSON
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
       'purpose': purpose,
       'clientID': clientID,
       'data': data,
+      'connections': connections,
     };
   }
 }
