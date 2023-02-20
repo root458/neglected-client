@@ -76,7 +76,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                SelectableText(
                   'Colorfy',
                   style: TextStyle(
                     fontSize: 20,
@@ -84,7 +84,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                     color: _bgColor == Colors.black ? Colors.white : null,
                   ),
                 ),
-                Text(
+                SelectableText(
                   'User ID: 3',
                   style: TextStyle(
                     fontSize: 15,
@@ -95,7 +95,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                SelectableText(
                   'Personalize for your friends',
                   style: TextStyle(
                     fontSize: 15,
