@@ -192,7 +192,14 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                 ),
                 if (_upgrade)
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _channel.sink.add(
+                        '_upgrade_',
+                      );
+                      setState(() {
+                        _upgrade = false;
+                      });
+                    },
                     height: 45,
                     minWidth: 200,
                     color: Colors.purple,
