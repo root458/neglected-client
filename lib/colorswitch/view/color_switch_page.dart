@@ -19,7 +19,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   late JsonEncoder _encoder;
   late JsonDecoder _decoder;
   String _clientID = 'Not set';
-  bool _upgrade = true;
+  bool _upgrade = false;
   Color _bgColor = Colors.white;
 
   @override
