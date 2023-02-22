@@ -125,7 +125,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                   ),
                 ),
                 SelectableText(
-                  'User ID: $_clientID',
+                  'User Rank: $_clientID',
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'SFRegular',
@@ -198,6 +198,8 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                       );
                       setState(() {
                         _upgrade = false;
+                        _clientID =
+                            '''(Trigger color change to confirm rank assigned)''';
                       });
                     },
                     height: 45,
