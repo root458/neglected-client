@@ -37,15 +37,16 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
             _decoder.convert(data as String) as Map<String, dynamic>,
           );
 
-          // Get IDs of all connected clients
-          final currentConnections =
-              json.decode(message.connections) as List<dynamic>;
-          // Get rank of current Index
-          final thisClientIndex = currentConnections
-              .indexOf(ColorSwitchConfig.instance!.values.clientUniqueID);
-          _clientID = thisClientIndex == -1 ? 'Not set' : '$thisClientIndex';
           switch (message.purpose) {
             case '_colorchange_':
+              // Get IDs of all connected clients
+              final currentConnections =
+                  json.decode(message.connections) as List<dynamic>;
+              // Get rank of current Index
+              final thisClientIndex = currentConnections
+                  .indexOf(ColorSwitchConfig.instance!.values.clientUniqueID);
+              _clientID =
+                  thisClientIndex == -1 ? 'Not set' : '$thisClientIndex';
               final color = CColor.fromJson(
                 _decoder.convert(message.data) as Map<String, dynamic>,
               );
@@ -58,6 +59,7 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
               break;
 
             case '_upgrade_':
+
               // Show upgrade chance to client
               final leavingID = int.parse(message.clientID);
               try {
