@@ -7,7 +7,7 @@ void main() {
   final uuid = const Uuid().v4();
   ColorSwitchConfig(
     values: ColorSwitchValues(
-      baseDomain: 'ws://localhost:8080/ws?id=$uuid',
+      baseDomain: 'wss://colorfy-friends-kz2g8.ondigitalocean.app/ws?id=$uuid',
       clientUniqueID: uuid,
     ),
   );
