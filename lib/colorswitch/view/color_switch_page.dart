@@ -4,6 +4,7 @@ import 'package:ds_client/colorswitch/models/ccolor.dart';
 import 'package:ds_client/colorswitch/models/message.dart';
 import 'package:ds_client/colorswitch/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class ColorSwitchPage extends StatefulWidget {
@@ -17,7 +18,8 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
   late WebSocketChannel _channel;
   late JsonEncoder _encoder;
   late JsonDecoder _decoder;
-  String _clientID = '0';
+  String _clientID = 'Not set';
+  bool _upgrade = true;
   Color _bgColor = Colors.white;
 
   @override
@@ -53,6 +55,18 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
               if (thisClientIndex >= int.parse(message.clientID)) {
                 _bgColor = Utils.getColor(color.color);
               }
+              break;
+
+            case '_upgrade_':
+              // Show upgrade chance to client
+              final leavingID = int.parse(message.clientID);
+              try {
+                final clientID = int.parse(_clientID);
+                if (clientID > leavingID) {
+                  _upgrade = true;
+                }
+              } catch (_) {}
+
               break;
             default:
           }
@@ -170,7 +184,30 @@ class _ColorSwitchPageState extends State<ColorSwitchPage> {
                       colorStr: 'yellow',
                     ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                if (_upgrade)
+                  MaterialButton(
+                    onPressed: () {},
+                    height: 45,
+                    minWidth: 200,
+                    color: Colors.purple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      'Upgrade',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'SFBold',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ).animate().shake(
+                        duration: const Duration(milliseconds: 800),
+                      ),
               ],
             ),
           ),
