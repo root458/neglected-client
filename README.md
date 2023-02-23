@@ -20,6 +20,9 @@ git clone https://github.com/root458/negelected-client
 2. Ensure that Flutter is installed on your system. If not, follow the instructions [here](https://docs.flutter.dev/get-started/install).
 3. Navigate to the project directory. Run:
 ```bash
+flutter pub get
+```
+```bash
 flutter run --flavor development --target lib/main_development.dart -d chrome
 ```
 This runs the application with the localhost server. Ensure you have installed and started the server locally by following the instructions [here](https://github.com/root458/ds-server), for this to work.
@@ -36,7 +39,7 @@ This launches the application for you.
 2. Tap any of the colors and watch the change. The server delivers your rank after your first color change.
 3. Watch the changes on your friends' instances which have lower ranks.
 If the client is the highest-ranked client, the background color will change for all clients with a lower rank than themselves.
-If a higher-ranked client disconnects, the server will notify all clients with a lower rank, allowing them to upgrade their rank by pressing the "Upgrade" button. Watch out for this notification when a button appears and vigorously shakes
+If a higher-ranked client disconnects, the server will notify all clients with a lower rank, allowing them to upgrade their rank by pressing the "Upgrade" button. Watch out for this notification when a button appears and vigorously shakes.
 
 ## Contributing
 
