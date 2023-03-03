@@ -15,7 +15,7 @@ To use the application, launch a web browser and access it [here](https://colorf
 ## How to install and run the project
 1. Clone the repository using git clone 
 ```bash
-git clone https://github.com/root458/neglected-client
+git clone https://github.com/root458/neglected-client.git
 ```
 2. Ensure that Flutter is installed on your system. If not, follow the instructions [here](https://docs.flutter.dev/get-started/install).
 3. Navigate to the project directory. Run:
